@@ -7,6 +7,7 @@ public class Move_Main : MonoBehaviour {
 	public float rot_speed;
 	Vector2 rt = new Vector2(1,0), lt = new Vector2(-1,0); 
 	Vector2 rot = new Vector2(0,0);
+	bool orient = true;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,18 +19,20 @@ public class Move_Main : MonoBehaviour {
 			transform.Translate (rt * mov_speed * Time.deltaTime, Space.World);
 			if (rot.y > 0)
 				rot += new Vector2(0,-rot_speed * Time.deltaTime);
+			orient = true;
 		}
-		/*else if(rot.y > 0)
-			rot += new Vector2(0,-rot_speed * Time.deltaTime);*/
+		else if (orient == true && rot.y > 0)
+			rot += new Vector2(0,-rot_speed * Time.deltaTime);
 
 
 		if (Input.GetKey (KeyCode.A) == true){
 			transform.Translate (lt * mov_speed * Time.deltaTime, Space.World);
 			if (rot.y < 180)
 				rot += new Vector2(0,rot_speed * Time.deltaTime);
+			orient = false;
 		}
-		/*else if(rot.y < 180)
-			rot += new Vector2(0,-rot_speed * Time.deltaTime);*/
+		else if (orient == false && rot.y < 180)
+			rot += new Vector2(0,rot_speed * Time.deltaTime);
 
 
 		if (rot.y < 0)

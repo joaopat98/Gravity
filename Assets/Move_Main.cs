@@ -5,7 +5,8 @@ using UnityEngine;
 public class Move_Main : MonoBehaviour {
 	public float mov_speed;
 	public float rot_speed;
-	Vector2 rt = new Vector2(1,0), lt = new Vector2(-1,0);
+	Vector2 rt = new Vector2(1,0), lt = new Vector2(-1,0); 
+	Vector2 rot = new Vector2(0,0);
 	// Use this for initialization
 	void Start () {
 		
@@ -15,16 +16,27 @@ public class Move_Main : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey (KeyCode.D) == true) {
 			transform.Translate (rt * mov_speed * Time.deltaTime, Space.World);
-			if (transform.eulerAngles.y != 0)
-				transform.Rotate (-Vector2.up * rot_speed * Time.deltaTime);
+			if (rot.y > 0)
+				rot += new Vector2(0,-rot_speed * Time.deltaTime);
 		}
-		if (Input.GetKey (KeyCode.A) == true) {
-			transform.Translate (lt * mov_speed * Time.deltaTime, Space.World);
-			if (transform.eulerAngles.y != 180)
-				transform.Rotate (Vector2.up * rot_speed * Time.deltaTime);
-		}
+		/*else if(rot.y > 0)
+			rot += new Vector2(0,-rot_speed * Time.deltaTime);*/
 
-		if (transform.eulerAngles.y > 180)
-			transform.eulerAngles = new Vector2(0,180);
+
+		if (Input.GetKey (KeyCode.A) == true){
+			transform.Translate (lt * mov_speed * Time.deltaTime, Space.World);
+			if (rot.y < 180)
+				rot += new Vector2(0,rot_speed * Time.deltaTime);
+		}
+		/*else if(rot.y < 180)
+			rot += new Vector2(0,-rot_speed * Time.deltaTime);*/
+
+
+		if (rot.y < 0)
+			rot = new Vector2 (0, 0);
+		if (rot.y > 180)
+			rot = new Vector2 (0, 180);
+		transform.eulerAngles = rot;
+			
 	}
 }

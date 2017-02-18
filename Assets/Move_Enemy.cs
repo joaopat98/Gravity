@@ -25,8 +25,7 @@ public class Move_Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log(rotating);
+        
 
         if (rotating == false)
         {

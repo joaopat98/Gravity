@@ -64,9 +64,9 @@ public class Sphere_ctrl : MonoBehaviour {
 				break;
 			}
 			if ((ang > 50 && ang < 85) || (ang > 140 && ang < 175) || (ang > 230 && ang < 265) || (ang > 320 && ang < 355))
-				world.RotateAround (transform.position, Vector3.forward, rot_speed * Time.deltaTime);
+				world.RotateAround (transform.position, Vector3.forward, 2 * rot_speed * Time.deltaTime);
 			else if ((ang > 5 && ang < 40) || (ang > 95 && ang < 130) || (ang > 185 && ang < 220) || (ang > 275 && ang < 310))
-				world.RotateAround (transform.position, Vector3.forward, rot_speed * Time.deltaTime);
+				world.RotateAround (transform.position, Vector3.forward, 2* rot_speed * Time.deltaTime);
 			else {
 				switch (mult) {
 				case 1:

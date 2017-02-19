@@ -48,25 +48,10 @@ public class Sphere_ctrl : MonoBehaviour {
 		if(transition == true){
 			active = false;
 			mult = (int)ang / 45;
-			switch (mult) {
-			case 1:
-			case 3:
-			case 5:
-			case 7:
-				d_ang = ((mult + 1) * 45) - ang;
-				if (d_ang < 5)
-					world.eulerAngles = new Vector3(world.eulerAngles.x, world.eulerAngles.y, ((mult + 1) * 45));
-				break;
-			default: 
-				d_ang = ang - ((mult - 1) * 45);
-				if (d_ang < 5)
-					world.eulerAngles = new Vector3(world.eulerAngles.x, world.eulerAngles.y, ((mult - 1) * 45));
-				break;
-			}
 			if ((ang > 50 && ang < 85) || (ang > 140 && ang < 175) || (ang > 230 && ang < 265) || (ang > 320 && ang < 355))
 				world.RotateAround (transform.position, Vector3.forward, 2 * rot_speed * Time.deltaTime);
 			else if ((ang > 5 && ang < 40) || (ang > 95 && ang < 130) || (ang > 185 && ang < 220) || (ang > 275 && ang < 310))
-				world.RotateAround (transform.position, Vector3.forward, 2* rot_speed * Time.deltaTime);
+				world.RotateAround (transform.position, Vector3.forward, -2 * rot_speed * Time.deltaTime);
 			else {
 				switch (mult) {
 				case 1:
@@ -76,7 +61,7 @@ public class Sphere_ctrl : MonoBehaviour {
 					world.eulerAngles = new Vector3(world.eulerAngles.x, world.eulerAngles.y, ((mult + 1) * 45));
 					break;
 				default: 
-						world.eulerAngles = new Vector3(world.eulerAngles.x, world.eulerAngles.y, ((mult - 1) * 45));
+					world.eulerAngles = new Vector3(world.eulerAngles.x, world.eulerAngles.y, (mult * 45));
 					break;
 				}
 				p_rigidbody.isKinematic = false;

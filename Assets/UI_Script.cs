@@ -11,7 +11,8 @@ public class UI_Script : MonoBehaviour {
     private AudioSource som_bg;
 
     private int level_keys;
-    private int current_keys = 0;
+    private int current_keys;
+    private int obtained_keys = 0;
 
     // Use this for initialization
     void Start () {
@@ -27,19 +28,32 @@ public class UI_Script : MonoBehaviour {
         }
 
         level_keys = (GameObject.FindGameObjectsWithTag("Key")).Length;
+        current_keys = level_keys;
     }
 	
 	// Update is called once per frame
 	void Update () {
         level.text = "LEVEL " + SceneManager.GetActiveScene().buildIndex;
 
+        current_keys = (GameObject.FindGameObjectsWithTag("Key")).Length;
+        obtained_keys = level_keys - current_keys;
 
-        //GameObject son = this.GetComponentInChildren<RectTransform>().gameObject;
-        //son.GetComponentInChildren<Text>().text = 3.ToString();
-        if (Input.GetKeyDown(KeyCode.H))
+
+        Transform painel = this.transform.GetChild(1).transform;
+        for (int i =0; i< painel.childCount; i++)
         {
-            SceneManager.LoadScene(2);
+            GameObject child = painel.GetChild(i).gameObject;
+            Debug.Log(child.name);
+            if(child.name.Equals("Map Keys"))
+            {
+                child.GetComponent<Text>().text = current_keys.ToString("D2");
+            }
+            else if (child.name.Equals("Current Keys"))
+            {
+                child.GetComponent<Text>().text = obtained_keys.ToString("D2");
+            }
         }
+
 
 
     }

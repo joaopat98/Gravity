@@ -5,10 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UI_Script : MonoBehaviour {
-    private bool exists_audio = false;
-
+    
     private Text level;
-    private AudioSource som_bg;
 
     private int level_keys;
     private int current_keys;
@@ -18,16 +16,7 @@ public class UI_Script : MonoBehaviour {
     void Start () {
         level = this.GetComponentInChildren<Text>();
         
-        if (exists_audio == false)
-        {
-            som_bg = this.GetComponent<AudioSource>();
-            som_bg.Play();
-            exists_audio = true;
-            DontDestroyOnLoad(this);
-            
-        }
-
-        level_keys = (GameObject.FindGameObjectsWithTag("Key")).Length;
+        level_keys = keysLeft();
         current_keys = level_keys;
     }
 	
@@ -35,7 +24,7 @@ public class UI_Script : MonoBehaviour {
 	void Update () {
         level.text = "LEVEL " + SceneManager.GetActiveScene().buildIndex;
 
-        current_keys = (GameObject.FindGameObjectsWithTag("Key")).Length;
+        current_keys = keysLeft();
         obtained_keys = level_keys - current_keys;
 
 
@@ -56,5 +45,10 @@ public class UI_Script : MonoBehaviour {
 
 
 
+    }
+
+    public static int keysLeft()
+    {
+        return (GameObject.FindGameObjectsWithTag("Key")).Length;
     }
 }

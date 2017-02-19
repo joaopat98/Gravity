@@ -12,7 +12,17 @@ public class GoToNextLevel : MonoBehaviour {
 	
     void OnTriggerEnter2D(Collider2D player)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if(nextIndex < 16)
+        {
+            SceneManager.LoadScene(nextIndex);
+        }
+        else
+        {
+
+        }
+
+        
     }
 
 	// Update is called once per frame

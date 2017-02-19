@@ -23,12 +23,10 @@ public class UI_Script : MonoBehaviour {
             som_bg.Play();
             exists_audio = true;
             DontDestroyOnLoad(this);
-
-            level_keys = (GameObject.FindGameObjectsWithTag("Key")).Length;
-
-
+            
         }
 
+        level_keys = (GameObject.FindGameObjectsWithTag("Key")).Length;
     }
 	
 	// Update is called once per frame
